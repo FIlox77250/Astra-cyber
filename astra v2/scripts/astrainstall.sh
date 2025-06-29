@@ -102,7 +102,6 @@ install_dependencies() {
         "iptables-persistent"
         "pkg-config"
         "libssl-dev"
-        "netstat"
         "net-tools"
     )
     
@@ -179,7 +178,9 @@ build_astra() {
     cd "$INSTALL_DIR"
     
     # Ensure Rust is available
-    source "$HOME/.cargo/env" 2>/dev/null || true
+    if [ -f "$HOME/.cargo/env" ]; then
+        source "$HOME/.cargo/env"
+    fi
     export PATH="$HOME/.cargo/bin:$PATH"
     
     # Clean previous builds
